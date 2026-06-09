@@ -20,6 +20,10 @@ public class ElevationEntry : MonoBehaviour
 
             collision.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 15;
         }
+        else if (collision.gameObject.CompareTag("Goblin1"))
+        {
+            collision.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 15;
+        }
     }
     // private void OnTriggerExit2D(Collider2D collision)
     // {

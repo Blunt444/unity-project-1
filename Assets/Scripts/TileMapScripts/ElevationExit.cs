@@ -16,6 +16,13 @@ public class ElevationExit : MonoBehaviour
             {
                 boundary.enabled = false;
             }
+
+            collision.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 5;
+
+        }
+        else if (collision.gameObject.CompareTag("Goblin1"))
+        {
+            collision.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 5;
         }
     }
 }

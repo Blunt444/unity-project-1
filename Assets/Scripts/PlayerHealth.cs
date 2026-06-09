@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
     {
         healthText.text = "HP: " + currentHealth + " / " + maxHealth;
     }
-    public void changeHealth(int amount)
+    public void ChangeHealth(int amount)
     {
         currentHealth += amount;
 
