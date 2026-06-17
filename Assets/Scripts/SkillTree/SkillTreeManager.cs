@@ -1,16 +1,58 @@
+using TMPro;
 using UnityEngine;
 
 public class SkillTreeManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public SkillSlot[] skillSlots;
+    public TMP_Text pointsText;
+    public int availablePoints;
+
+    private void OnEnable()
     {
-        
+        SkillSlot.OnAbilityPointSpent += HandlePoints;
+        SkillSlot.OnSkillMaxed += HandleSkillMaxed;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        SkillSlot.OnAbilityPointSpent -= HandlePoints;
+        SkillSlot.OnSkillMaxed -= HandleSkillMaxed;
+    }
+
+    private void HandleSkillMaxed(SkillSlot skillSlot)
+    {
+        foreach (SkillSlot slot in skillSlots)
+        {
+        }
+    }
+
+    private void Start()
+    {
+        foreach (SkillSlot slot in skillSlots)
+        {
+            slot.skillButton.onClick.AddListener(() => CheckAvailablePoints(slot));
+        }
+        UpdatePoints(0);
+    }
+
+    private void CheckAvailablePoints(SkillSlot slot)
+    {
+        if (availablePoints > 0)
+        {
+            slot.TryUpgradeSkill();
+        }
+    }
+
+    public void HandlePoints(SkillSlot skillSlot)
+    {
+        if (availablePoints > 0)
+        {
+            UpdatePoints(-1);
+        }
+    }
+    public void UpdatePoints(int amount)
+    {
+        availablePoints += amount;
+        pointsText.text = "Skill Points: " + availablePoints;
     }
 }

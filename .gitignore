@@ -14,6 +14,7 @@ UserSettings/
 # Unity Generated Files
 *.csproj
 *.sln
+*.slnx
 *.suo
 *.tmp
 *.user
