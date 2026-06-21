@@ -24,7 +24,7 @@ AnimationClip:
       value: {fileID: -3093811841882010217, guid: be65cadc09b7e2a43baf2e8b92f03f22, type: 3}
     - time: 0.083333336
       value: {fileID: 6824409124470345055, guid: be65cadc09b7e2a43baf2e8b92f03f22, type: 3}
-    - time: 0.18333334
+    - time: 0.16666667
       value: {fileID: -7866555688576549673, guid: be65cadc09b7e2a43baf2e8b92f03f22, type: 3}
     - time: 0.25
       value: {fileID: 3629576908501536167, guid: be65cadc09b7e2a43baf2e8b92f03f22, type: 3}
@@ -93,4 +93,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.48333332
+    functionName: Shoot
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

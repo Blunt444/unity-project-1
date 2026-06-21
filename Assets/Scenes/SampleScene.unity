@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 299680821}
   - component: {fileID: 299680820}
   - component: {fileID: 299680822}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision-Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8064,7 +8064,7 @@ GameObject:
   - component: {fileID: 1253803071}
   - component: {fileID: 1253803073}
   - component: {fileID: 1253803072}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Non-Collision-High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9483,6 +9483,7 @@ GameObject:
   - component: {fileID: 1840990462}
   - component: {fileID: 1840990463}
   - component: {fileID: 1840990464}
+  - component: {fileID: 1840990465}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -9646,6 +9647,7 @@ MonoBehaviour:
   facingDirection: 1
   rb: {fileID: 1840990456}
   anim: {fileID: 1840990461}
+  isShooting: 0
 --- !u!95 &1840990461
 Animator:
   serializedVersion: 7
@@ -9705,7 +9707,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840990455}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9921432b68d3ec047b9a85c2f156a54a, type: 3}
   m_Name: 
@@ -9716,6 +9718,22 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1351329742435749367, guid: 5a5980676c5f42c4ea630aea6e1247ca, type: 3}
   aimDirection: {x: 1, y: 0}
   shootCooldown: 0.7
+  anim: {fileID: 1840990461}
+  playerMovement: {fileID: 1840990460}
+--- !u!114 &1840990465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840990455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4376a4bb5751510409ae64519e49b7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player_ChangeStance
+  playerCombat: {fileID: 1840990463}
+  playerBow: {fileID: 1840990464}
 --- !u!1 &1870128092
 GameObject:
   m_ObjectHideFlags: 0
@@ -10018,7 +10036,7 @@ GameObject:
   - component: {fileID: 1881792872}
   - component: {fileID: 1881792871}
   - component: {fileID: 1881792870}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision-High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
