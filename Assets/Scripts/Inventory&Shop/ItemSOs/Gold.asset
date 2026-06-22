@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 701ba618ca65e5240a8e2d7bb2d22bbe, type: 3}
-  m_Name: Mushroom
+  m_Name: Gold
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemName: Mushroom
-  itemDescription: It is a mushroom......
-  icon: {fileID: 21300000, guid: 4afc7a53a643af04094781ee18e78f1f, type: 3}
-  isGold: 0
+  itemName: Gold
+  itemDescription: Cold hard cash. Use to buy items from shop.
+  icon: {fileID: 21300000, guid: 89ee8dfe79d7ff64287e7f0399dbce45, type: 3}
+  isGold: 1
   currentHealth: 0
   maxHealth: 0
   speed: 0
