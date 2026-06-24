@@ -7,6 +7,8 @@ public class UseItem : MonoBehaviour
     {
         AdjustStats(itemSO, 1);
 
+        Debug.Log(itemSO);
+
         if (itemSO.duration > 0)
             StartCoroutine(EffectTimer(itemSO, itemSO.duration));
     }

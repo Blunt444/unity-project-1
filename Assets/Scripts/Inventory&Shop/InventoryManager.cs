@@ -1,7 +1,5 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.Interactions;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -61,6 +59,7 @@ public class InventoryManager : MonoBehaviour
             {
                 inventorySlot.itemSO = null;
             }
+            inventorySlot.UpdateUI();
         }
     }
 }

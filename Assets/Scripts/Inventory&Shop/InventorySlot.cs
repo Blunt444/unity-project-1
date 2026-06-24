@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerClickHandler
+public class InventorySlot : MonoBehaviour, IPointerDownHandler
 {
     public ItemSO itemSO;
     public int quantity;
@@ -19,7 +19,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         inventoryManager = GetComponentInParent<InventoryManager>();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         if (quantity > 0)
         {
@@ -28,6 +28,13 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
                 inventoryManager.UseItem(this);
             }
         }
+        if (quantity <= 0)
+        {
+            itemSO = null;
+            itemImage = null;
+            quantityText.text = "";
+        }
+        Debug.Log(itemSO);
     }
 
     public void UpdateUI()
