@@ -15,6 +15,8 @@ MonoBehaviour:
   itemName: Gold
   itemDescription: Cold hard cash. Use to buy items from shop.
   icon: {fileID: 21300000, guid: 89ee8dfe79d7ff64287e7f0399dbce45, type: 3}
+  stackSize: 64
+  uiOffset: {x: 0, y: 0}
   isGold: 1
   currentHealth: 0
   maxHealth: 0

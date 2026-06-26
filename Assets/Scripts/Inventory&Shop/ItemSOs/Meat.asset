@@ -15,9 +15,10 @@ MonoBehaviour:
   itemName: Meat
   itemDescription: Heals you by 1.
   icon: {fileID: 21300000, guid: 9b8fb53fe6612e54ba95f53db807945c, type: 3}
+  stackSize: 64
   uiOffset: {x: -5, y: 20}
   isGold: 0
-  currentHealth: 0
+  currentHealth: 1
   maxHealth: 0
   speed: 0
   damage: 0
