@@ -1,12 +1,64 @@
 using UnityEngine;
-using UnityEngine.Splines.ExtrusionShapes;
-
+using System.Collections.Generic;
+using System;
 public class ShopKeeper : MonoBehaviour
 {
 
     public Animator anim;
+    public CanvasGroup shopCanvasGroup;
+    public ShopManager shopManager;
+
+    [SerializeField] private List<ShopItems> shopItems;
+    [SerializeField] private List<ShopItems> shopWeapons;
+    [SerializeField] private List<ShopItems> shopArmours;
+    public static event Action<ShopManager, bool> OnShopStateChanged;
+
 
     private bool playerInRange;
+    private bool isShopOpen;
+
+    void Update()
+    {
+        if (playerInRange)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                if (isShopOpen)
+                {
+                    Time.timeScale = 1;
+                    shopCanvasGroup.alpha = 0;
+                    shopCanvasGroup.interactable = false;
+                    shopCanvasGroup.blocksRaycasts = false;
+                    isShopOpen = false;
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                    OnShopStateChanged?.Invoke(shopManager, true);
+                    shopCanvasGroup.alpha = 1;
+                    shopCanvasGroup.blocksRaycasts = true;
+                    shopCanvasGroup.interactable = true;
+                    isShopOpen = true;
+                    OpenItemShop();
+                }
+            }
+        }
+    }
+
+    public void OpenItemShop()
+    {
+        shopManager.PopulateShopItems(shopItems);
+    }
+
+    public void OpenWeaponShop()
+    {
+        shopManager.PopulateShopItems(shopWeapons);
+    }
+
+    public void OpenArmourShop()
+    {
+        shopManager.PopulateShopItems(shopArmours);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

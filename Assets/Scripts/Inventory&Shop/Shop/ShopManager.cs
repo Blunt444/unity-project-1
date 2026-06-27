@@ -1,31 +1,27 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 
 public class ShopManager : MonoBehaviour
 {
-    public static event Action<ShopManager, bool> OnShopStateChanged;
-    [SerializeField] private List<ShopItems> shopItems;
-
     [SerializeField] private ShopSlot[] shopSlots;
 
     [SerializeField] private InventoryManager inventoryManager;
 
-    public void Start()
+    public void PopulateShopItems(List<ShopItems> shopItems)
     {
-        PopulateShopItems();
-        OnShopStateChanged?.Invoke(this, true);
-    }
 
-    public void PopulateShopItems()
-    {
-        for (int i = 0; i < shopItems.Count && i < shopSlots.Length; i++)
+        int activeSlots = 0;
+
+        for (int i = 0; i < shopItems.Count; i++)
         {
+            if(activeSlots >= shopSlots.Length) break;
+            if (shopItems[i] == null || shopItems[i].itemSO == null) continue;
             ShopItems shopItem = shopItems[i];
             shopSlots[i].Initialize(shopItem.itemSO, shopItem.price);
             shopSlots[i].gameObject.SetActive(true);
+            activeSlots++;
         }
-        for (int i = shopItems.Count; i < shopSlots.Length; i++)
+        for (int i = activeSlots; i < shopSlots.Length; i++)
         {
             shopSlots[i].gameObject.SetActive(false);
         }
@@ -33,11 +29,11 @@ public class ShopManager : MonoBehaviour
 
     public void SellItems(ItemSO itemSO)
     {
-        if(itemSO == null) return;
+        if (itemSO == null) return;
 
         foreach (ShopSlot slot in shopSlots)
         {
-            if(slot.itemSO == itemSO)
+            if (slot.itemSO == itemSO)
             {
                 inventoryManager.gold += slot.price / 2;
                 inventoryManager.goldText.text = inventoryManager.gold.ToString();
