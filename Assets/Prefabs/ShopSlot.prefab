@@ -441,7 +441,10 @@ MonoBehaviour:
   itemNameText: {fileID: 1179475277084874466}
   priceText: {fileID: 2193125332456514467}
   itemImage: {fileID: 1747927635468141531}
+  imageRectTransform: {fileID: 1542404306756314115}
+  price: 0
   shopManager: {fileID: 0}
+  shopInfo: {fileID: 0}
 --- !u!1 &5750690536074707643
 GameObject:
   m_ObjectHideFlags: 0

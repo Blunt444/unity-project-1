@@ -4,6 +4,8 @@ using System;
 public class ShopKeeper : MonoBehaviour
 {
 
+    public static ShopKeeper currentShopKeeper;
+
     public Animator anim;
     public CanvasGroup shopCanvasGroup;
     public ShopManager shopManager;
@@ -21,18 +23,23 @@ public class ShopKeeper : MonoBehaviour
     {
         if (playerInRange)
         {
-            if (Input.GetButtonDown("Interact"))
+            if (isShopOpen)
             {
-                if (isShopOpen)
+                if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Interact"))
                 {
+                    currentShopKeeper = null;
                     Time.timeScale = 1;
                     shopCanvasGroup.alpha = 0;
                     shopCanvasGroup.interactable = false;
                     shopCanvasGroup.blocksRaycasts = false;
                     isShopOpen = false;
                 }
-                else
+            }
+            else
+            {
+                if (Input.GetButtonDown("Interact"))
                 {
+                    currentShopKeeper = this;
                     Time.timeScale = 0;
                     OnShopStateChanged?.Invoke(shopManager, true);
                     shopCanvasGroup.alpha = 1;

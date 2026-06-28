@@ -8,6 +8,8 @@ public class ItemSO : ScriptableObject
    public Sprite icon;
    public int stackSize;
    public Vector2 uiOffset;
+   public Vector2 shopUIOffset;
+   public Vector2 shopUIItemSize = new Vector2(120,120);
 
    public bool isGold;
 
