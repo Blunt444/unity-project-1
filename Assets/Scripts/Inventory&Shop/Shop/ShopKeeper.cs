@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Unity.VisualScripting;
 public class ShopKeeper : MonoBehaviour
 {
 
@@ -13,6 +14,8 @@ public class ShopKeeper : MonoBehaviour
     [SerializeField] private List<ShopItems> shopItems;
     [SerializeField] private List<ShopItems> shopWeapons;
     [SerializeField] private List<ShopItems> shopArmours;
+    [SerializeField] private Camera shopKeeperCam;
+    [SerializeField] private Vector3 cameraOffset = new Vector3(0, 0, -1);
     public static event Action<ShopManager, bool> OnShopStateChanged;
 
 
@@ -33,6 +36,8 @@ public class ShopKeeper : MonoBehaviour
                     shopCanvasGroup.interactable = false;
                     shopCanvasGroup.blocksRaycasts = false;
                     isShopOpen = false;
+
+                    shopKeeperCam.gameObject.SetActive(false);
                 }
             }
             else
@@ -46,6 +51,10 @@ public class ShopKeeper : MonoBehaviour
                     shopCanvasGroup.blocksRaycasts = true;
                     shopCanvasGroup.interactable = true;
                     isShopOpen = true;
+
+                    shopKeeperCam.transform.position = transform.position + cameraOffset;
+                    shopKeeperCam.gameObject.SetActive(true);
+
                     OpenItemShop();
                 }
             }
