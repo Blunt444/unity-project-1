@@ -17,6 +17,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4afc7a53a643af04094781ee18e78f1f, type: 3}
   stackSize: 64
   uiOffset: {x: 0, y: 0}
+  shopUIOffset: {x: 0, y: 0}
+  shopUIItemSize: {x: 150, y: 160}
   isGold: 0
   currentHealth: 0
   maxHealth: 0
