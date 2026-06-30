@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class NPC_Talk : MonoBehaviour
 {
+
+    public DialogSO dialogSO;
+
     private Rigidbody2D rb;
     private Animator anim;
     [SerializeField] private Animator interactionAnim;
@@ -24,5 +27,20 @@ public class NPC_Talk : MonoBehaviour
     {
         interactionAnim.Play("CloseIcon");
         rb.bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Interact"))
+        {
+            if (DialogueManager.Instance.isDialogueActive)
+            {
+                DialogueManager.Instance.AdvanceDialogue();
+            }
+            else
+            {
+                DialogueManager.Instance.StartDialogue(dialogSO);
+            }
+        }
     }
 }
