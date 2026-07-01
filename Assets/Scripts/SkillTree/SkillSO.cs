@@ -8,6 +8,13 @@ public class SkillSO : ScriptableObject
     public int maxLevel;
     public Sprite skillIcon;
     public SkillCategory category;
-    public List<SkillSO> prerequisites;
+    public List<SkillPrerequisite> prerequisites;
 }
 public enum SkillCategory { Combat, Magic };
+
+[System.Serializable]
+public class SkillPrerequisite
+{
+    public SkillSO skillSO;
+    public int requiredLevel = 1;
+}
