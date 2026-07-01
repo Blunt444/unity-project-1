@@ -23,4 +23,4 @@ MonoBehaviour:
   - optionText: Tell me more!
     nextDialog: {fileID: 11400000, guid: c088c965b0f495e4bb0c8b9159be5282, type: 2}
   - optionText: Not interested
-    nextDialog: {fileID: 0}
+    nextDialog: {fileID: 11400000, guid: 3a70d951020e495469b4a7a7834693e4, type: 2}
