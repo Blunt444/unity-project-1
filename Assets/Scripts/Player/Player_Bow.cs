@@ -1,21 +1,25 @@
+using System;
 using UnityEngine;
 
 public class Player_Bow : MonoBehaviour
 {
-    public Transform launchPointHorizontal;
-    public Transform launchPointVertical;
-    public Transform currentLaunchPoint;
+    public Transform launchPoint;
     public GameObject arrowPrefab;
     public Vector2 aimDirection;
     public float shootCooldown;
     public Animator anim;
     public PlayerMovement playerMovement;
+    public Camera mainCamera;
 
     private float shootTimer;
 
     private void Start()
     {
-        currentLaunchPoint = launchPointHorizontal;
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+
         anim.SetFloat("aimX", aimDirection.x);
         anim.SetFloat("aimY", aimDirection.y);
     }
@@ -23,11 +27,14 @@ public class Player_Bow : MonoBehaviour
     void Update()
     {
         shootTimer -= Time.deltaTime;
-        HandleAiming();
         if (Input.GetButtonDown("Shoot") && shootTimer <= 0)
         {
             playerMovement.isShooting = true;
-            gameObject.GetComponent<PlayerMovement>().ChangeState(PlayerState.Shooting);
+            playerMovement.ChangeState(PlayerState.Shooting);
+        }
+        if (playerMovement.isShooting)
+        {
+            HandleAiming();
         }
     }
     private void OnEnable()
@@ -43,50 +50,30 @@ public class Player_Bow : MonoBehaviour
     public void Shoot()
     {
         if (shootTimer > 0) return;
-        Arrow arrow = Instantiate(arrowPrefab, currentLaunchPoint.position, Quaternion.identity).GetComponent<Arrow>();
+
+        Arrow arrow = Instantiate(arrowPrefab, launchPoint.position, Quaternion.identity).GetComponent<Arrow>();
+
         arrow.Launch(aimDirection);
         shootTimer = shootCooldown;
-        gameObject.GetComponent<PlayerMovement>().ChangeState(PlayerState.Idle);
-        playerMovement.isShooting = false;
 
-        if (arrow == null)
-        {
-            Debug.LogError("Arrow component not found on prefab!");
-            return;
-        }
-        if (currentLaunchPoint == null)
-        {
-            Debug.LogError("currentLaunchPoint is null!");
-            return;
-        }
+        playerMovement.ChangeState(PlayerState.Idle);
+        playerMovement.isShooting = false;
     }
     private void HandleAiming()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        Vector3 mouseScreenPos = Input.mousePosition;
+        mouseScreenPos.z = mainCamera.WorldToScreenPoint(transform.position).z;
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(mouseScreenPos);
 
-        if (horizontal != 0 || vertical != 0)
+        aimDirection = (mouseWorldPos - launchPoint.position);
+        aimDirection.Normalize();
+
+        anim.SetFloat("aimX", aimDirection.x);
+        anim.SetFloat("aimY", aimDirection.y);
+
+        if (aimDirection.x != 0)
         {
-            aimDirection = new Vector2(horizontal, vertical).normalized;
-            anim.SetFloat("aimX", aimDirection.x);
-            anim.SetFloat("aimY", aimDirection.y);
-            if (vertical > 0)
-            {
-                currentLaunchPoint = launchPointVertical;
-                Vector3 pos = launchPointVertical.localPosition;
-                launchPointVertical.localPosition = new Vector3(pos.x, Mathf.Abs(pos.y), pos.z);
-            }
-            else if (vertical < 0)
-            {
-                currentLaunchPoint = launchPointVertical;
-                Vector3 pos = launchPointVertical.localPosition;
-                launchPointVertical.localPosition = new Vector3(pos.x, -Mathf.Abs(pos.y), pos.z);
-            }
-            else
-            {
-                currentLaunchPoint = launchPointHorizontal;
-            }
-
+            transform.localScale = new Vector3(Math.Abs(transform.localScale.x) * (aimDirection.x > 0 ? 1 : -1), transform.localScale.y, transform.localScale.z);
         }
     }
 }
